@@ -3,19 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { notifySuccess, notifyError } from "../notifications/index";
 import axios from "axios";
+import { IRegisterUserData } from "../interfaces/register";
 
 import { Login, LoginResponse, UserProviderProps } from "../interfaces";
 
 //-----------------------------INTERFACES------------------------------//
-
-interface IRegisterUserData {
-  name: string;
-  email: string;
-  password: string;
-  bio: string;
-  contact: string;
-  course_module: string;
-}
 
 export interface IUserTechs {
   id: string;

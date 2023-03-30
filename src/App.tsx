@@ -2,13 +2,17 @@ import React from "react";
 import "./App.css";
 import { GlobalStyle } from "./styles/global";
 import RoutesMain from "./routes";
+import { UserProvider } from "./contexts/UserContext";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div className="App">
       <GlobalStyle />
-
-      <RoutesMain />
+      <UserProvider>
+        <ToastContainer limit={3} />
+        <RoutesMain />
+      </UserProvider>
     </div>
   );
 };
