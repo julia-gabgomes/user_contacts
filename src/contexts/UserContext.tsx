@@ -74,10 +74,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const loginUser = async (loginData: Login): Promise<void> => {
     try {
-      const { data } = await api.post<LoginResponse>("/sessions", loginData);
+      const { data } = await api.post<LoginResponse>("/login", loginData);
       api.defaults.headers.common.authorization = `Bearer ${data.token}`;
       localStorage.setItem("@TOKEN", data.token);
-      localStorage.setItem("@USER_ID", data.user.id);
+      // localStorage.setItem("@USER_ID", data.user.id);
       setUser(data.user);
       //   setTechs(data.user.techs);
       notifySuccess("Login realizado com sucesso!");

@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global";
 import RoutesMain from "./routes";
 import { UserProvider } from "./contexts/UserContext";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
