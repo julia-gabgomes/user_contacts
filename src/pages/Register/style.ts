@@ -27,8 +27,9 @@ export const RegisterHeader = styled.div`
 export const RegisterBox = styled.div`
   width: 100%;
   max-width: 369px;
-  background-color: #212529;
+  background-color: var(--gray-1);
   padding: 34px 18px;
+  margin-bottom: 50px;
 
   box-shadow: 0px 4px 34px -8px rgb(0 0 0 / 25%);
   border-radius: 4px;

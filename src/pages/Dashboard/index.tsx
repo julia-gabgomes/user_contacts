@@ -1,14 +1,9 @@
-// import { DashNavbar } from "../../components/DashNavbar";
-// import { DashHeader } from "../../components/DashHeader";
-// import { TechProvider } from "../../contexts/TechContext";
-// import { DashMain } from "../../components/DashMain";
+import { DashNavbar } from "../../components/DashNavbar";
+import { DashHeader } from "../../components/DashHeader";
 
-// export const Dashboard = () => (
-//   <>
-//     <DashNavbar />
-//     <DashHeader />
-//     <TechProvider>
-//       <DashMain />
-//     </TechProvider>
-//   </>
-// );
+export const Dashboard = () => (
+  <>
+    <DashNavbar />
+    <DashHeader />
+  </>
+);

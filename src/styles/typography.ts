@@ -80,6 +80,11 @@ export const StyledText = styled(BaseText)`
           color: var(--color-primary);
         `;
 
+      case "--gray-4":
+        return css`
+          color: var(--gray-4);
+        `;
+
       default:
         return css`
           color: var(--gray-1);

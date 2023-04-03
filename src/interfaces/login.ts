@@ -4,15 +4,15 @@ interface Login {
 }
 
 interface LoginResponse {
+  token: string;
   user: {
     id: string;
     full_name: string;
-    email: string;
     phone_number: string;
-    created_at: Date;
-    // contacts: IUserTechs[] | null;
+    email: string;
+    isActive: boolean;
+    createdAt: Date;
   };
-  token: string;
 }
 
 export type { Login, LoginResponse };
