@@ -20,7 +20,7 @@ export interface IUser {
   full_name: string;
   email: string;
   phone_number: string;
-  created_at: Date;
+  createdAt: Date;
   // contacts: IUserTechs[] | null;
 }
 
@@ -43,16 +43,19 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [techs, setTechs] = useState<IUserTechs[] | null>(null);
   const [loading, setLoading] = useState(true);
 
+  console.log(user);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadUser = async () => {
-      const token = localStorage.getItem("@TOKEN");
+      const token: string | null = localStorage.getItem("@TOKEN");
+      const userId: string | null = localStorage.getItem("@USER_ID");
 
       if (token) {
         try {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
-          const { data } = await api.get<IUser>("/profile");
+          const { data } = await api.get<IUser>(`/users/${userId}`);
 
           setUser(data);
           //   setTechs(data.techs);
@@ -77,7 +80,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       const { data } = await api.post<LoginResponse>("/login", loginData);
       api.defaults.headers.common.authorization = `Bearer ${data.token}`;
       localStorage.setItem("@TOKEN", data.token);
-      // localStorage.setItem("@USER_ID", data.user.id);
+      localStorage.setItem("@USER_ID", data.user.id);
       setUser(data.user);
       //   setTechs(data.user.techs);
       notifySuccess("Login realizado com sucesso!");

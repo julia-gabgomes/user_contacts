@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
-import { z } from "zod";
+// import { z } from "zod";
+import * as yup from "yup";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { Login } from "../../interfaces";
 
 import { Label } from "../../styles/label";
 import { StyledText } from "../../styles/typography";
@@ -13,12 +17,17 @@ import { Input } from "../../styles/input";
 import { ButtonPrimary } from "../../styles/buttons";
 import { StyledLink } from "../../styles/link";
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
+export const loginSchema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Insira um e-mail válido")
+      .required("O campo e-mail é obrigatório"),
+    password: yup.string().required("A senha é obrigatória"),
+  })
+  .required();
 
-type Login = z.infer<typeof loginSchema>;
+// type Login = z.infer<typeof loginSchema>;
 
 export const FormLogin = () => {
   const { loginUser } = useContext(UserContext);
@@ -27,9 +36,11 @@ export const FormLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(loginSchema),
+  } = useForm<Login>({
+    resolver: yupResolver(loginSchema),
   });
+
+  console.log(errors);
 
   const onSubmit = (data: Login) => {
     loginUser(data);
@@ -52,9 +63,10 @@ export const FormLogin = () => {
             {...register("email")}
           />
         </Label>
-        <StyledText typo="helper-text" color="gray-4" tag="p">
+        {/* <StyledText typo="helper-text" color="gray-4" tag="p">
           {errors.email?.message as any}
-        </StyledText>
+        </StyledText> */}
+        <p>{errors.email?.message as any}</p>
 
         <Label>
           <StyledText typo="headline" color="gray-0" tag="h3">
@@ -67,9 +79,10 @@ export const FormLogin = () => {
             {...register("password")}
           />
         </Label>
-        <StyledText typo="helper-text" color="gray-4" tag="p">
+        {/* <StyledText typo="helper-text" color="gray-4" tag="p">
           {errors.password?.message as any}
-        </StyledText>
+        </StyledText> */}
+        <p>{errors.password?.message as any}</p>
 
         <ButtonPrimary type="submit">Entrar</ButtonPrimary>
       </Form>
